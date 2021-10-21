@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon  } from '@fortawesome/react-fontawesome';
-import { faRoute, faTimes, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faDotCircle, faTimes, faBars } from '@fortawesome/free-solid-svg-icons';
 import './Navbar.css';
 import { Button } from './Button';
 
@@ -20,14 +20,18 @@ export default function Navbar() {
         }
     };
 
+    useEffect(() => {
+        showButton()
+    }, []);
+
     window.addEventListener('resize', showButton);
 
     return (
         <>
             <nav className="navbar">
                 <div className="navbar-container">
-                    <Link to="/" className="navbar-logo">
-                        TRVL  <FontAwesomeIcon icon={faRoute} />
+                    <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
+                        TRVL &nbsp; <FontAwesomeIcon icon={faDotCircle} />
                     </Link>
                     <div className="menu-icon" onClick={handleClick}>
                         <FontAwesomeIcon icon={click ? faTimes : faBars} />
